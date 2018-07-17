@@ -8,6 +8,8 @@ TagManager:
   - GroundCheck
   - CheckPoint
   - Antimatter
+  - GameManager
+  - Atom
   layers:
   - Default
   - TransparentFX
