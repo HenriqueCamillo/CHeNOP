@@ -7,25 +7,37 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] private GameObject[] atoms;
 	[SerializeField] private GameObject currentAtom;
 	[SerializeField] private int currentAtomNumber;
+	[SerializeField] private Atom currentAtomScript;
+	[SerializeField] private bool darkness;
+	[SerializeField] private SpriteRenderer dark;
+	[SerializeField] private Collider2D mercuryCollider; 
 
-	enum atom {
+	//private Renderer darkRend;
+
+	private enum atom {
 		Mercury = 0,
 		Helium = 1,
 		Lead = 2,
 		Phosphorus = 3,
 	};
 
-	void Start () {
+	private void Start () {
 		Instantiate(atoms[(int)atom.Mercury], this.transform.position, this.transform.rotation, null);
 		currentAtomNumber = (int)atom.Mercury;
 		currentAtom = GameObject.FindGameObjectWithTag("Atom");
+		currentAtomScript = currentAtom.GetComponent<Atom>();
+		mercuryCollider = currentAtom.GetComponent<Collider2D>(); 
+		//darkRend = dark.GetComponent<Renderer>();
+		dark.enabled = false; 
 	}
 	
-	void Update () {
+	private void Update () {
 		if(currentAtom!=null)
 			this.transform.position = currentAtom.transform.position;
-		else	
+		else{	
 			currentAtom = GameObject.FindGameObjectWithTag("Atom");
+			currentAtomScript = currentAtom.GetComponent<Atom>();
+		}
 
 			//Atom change
 		if(Input.GetKeyDown(KeyCode.Alpha1) && currentAtomNumber!=(int)atom.Mercury){
@@ -37,13 +49,27 @@ public class GameManager : MonoBehaviour {
 		}else if(Input.GetKeyDown(KeyCode.Alpha4) && currentAtomNumber!=(int)atom.Phosphorus){
 			changeAtom((int)atom.Phosphorus);
 		}
+
+		if(currentAtomScript.usingPower){
+			if(!darkness || currentAtomNumber == (int)atom.Phosphorus){
+				dark.enabled = false;
+			}else{
+				dark.enabled = true;
+			}
+
+			if(currentAtomNumber == (int)atom.Mercury){
+				mercuryCollider.enabled = false;
+			}
+		}else {
+			mercuryCollider.enabled = true;
+		}	
 	}
 
 	private void changeAtom(int atomNumber){
 		currentAtomNumber = atomNumber;
-		var	spawn = currentAtom.transform;
 		Destroy(currentAtom);
 		Instantiate(atoms[atomNumber], this.transform.position, this.transform.rotation, null);
 		currentAtom = GameObject.FindGameObjectWithTag("Atom");
+		currentAtomScript = currentAtom.GetComponent<Atom>();
 	}
 }
