@@ -11,7 +11,7 @@ public class Atom : MonoBehaviour {
 	[SerializeField] private GroundCheck gndChckScript;
 	private GameObject gameManager;
 	private GameManager gmMngrScrpit;
-	private bool facingRight = true;
+//	private bool facingRight = true;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();

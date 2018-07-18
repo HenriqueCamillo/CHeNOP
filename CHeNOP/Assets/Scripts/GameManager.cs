@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 	public Vector2 respawn;
-	private var spawn;
 	[SerializeField] private GameObject[] atoms;
 	[SerializeField] private GameObject currentAtom;
 	[SerializeField] private int currentAtomNumber;
@@ -17,42 +16,34 @@ public class GameManager : MonoBehaviour {
 	};
 
 	void Start () {
-		Instantiate(atoms[(int)atom.Mercury], this.transform);
+		Instantiate(atoms[(int)atom.Mercury], this.transform.position, this.transform.rotation, null);
 		currentAtomNumber = (int)atom.Mercury;
 		currentAtom = GameObject.FindGameObjectWithTag("Atom");
 	}
 	
 	void Update () {
-		if(currentAtom == null)
+		if(currentAtom!=null)
+			this.transform.position = currentAtom.transform.position;
+		else	
 			currentAtom = GameObject.FindGameObjectWithTag("Atom");
 
+			//Atom change
 		if(Input.GetKeyDown(KeyCode.Alpha1) && currentAtomNumber!=(int)atom.Mercury){
-			currentAtomNumber = (int)atom.Mercury;
-			spawn = currentAtom.transform;
-			Destroy(currentAtom);
-			Instantiate(atoms[(int)atom.Mercury], spawn);
-			currentAtom = GameObject.FindGameObjectWithTag("Atom");
+			changeAtom((int)atom.Mercury);
+		}else if(Input.GetKeyDown(KeyCode.Alpha2) && currentAtomNumber!=(int)atom.Helium){
+			changeAtom((int)atom.Helium);
+		}else if(Input.GetKeyDown(KeyCode.Alpha3) && currentAtomNumber!=(int)atom.Lead){
+			changeAtom((int)atom.Lead);
+		}else if(Input.GetKeyDown(KeyCode.Alpha4) && currentAtomNumber!=(int)atom.Phosphorus){
+			changeAtom((int)atom.Phosphorus);
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha2) && currentAtomNumber!=(int)atom.Helium){
-			currentAtomNumber = (int)atom.Helium;
-			spawn = currentAtom.transform;
-			Destroy(currentAtom);
-			Instantiate(atoms[(int)atom.Helium], spawn);
-			currentAtom = GameObject.FindGameObjectWithTag("Atom");
-		}
-		if(Input.GetKeyDown(KeyCode.Alpha3) && currentAtomNumber!=(int)atom.Lead){
-			currentAtomNumber = (int)atom.Lead;
-			spawn = currentAtom.transform;
-			Destroy(currentAtom);
-			Instantiate(atoms[(int)atom.Lead], spawn);
-			currentAtom = GameObject.FindGameObjectWithTag("Atom");
-		}
-		if(Input.GetKeyDown(KeyCode.Alpha4) && currentAtomNumber!=(int)atom.Phosphorus){
-			currentAtomNumber = (int)atom.Phosphorus;
-			spawn = currentAtom.transform;
-			Destroy(currentAtom);
-			Instantiate(atoms[(int)atom.Phosphorus], spawn);
-			currentAtom = GameObject.FindGameObjectWithTag("Atom");
-		}
+	}
+
+	private void changeAtom(int atomNumber){
+		currentAtomNumber = atomNumber;
+		var	spawn = currentAtom.transform;
+		Destroy(currentAtom);
+		Instantiate(atoms[atomNumber], this.transform.position, this.transform.rotation, null);
+		currentAtom = GameObject.FindGameObjectWithTag("Atom");
 	}
 }

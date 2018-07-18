@@ -341,12 +341,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawn: {x: 0, y: 0}
-  spawn: {fileID: 0}
   atoms:
-  - {fileID: 1556068956635286, guid: 0b15eaf4d11ae5e4f9fd6e81dae44355, type: 2}
-  - {fileID: 1892102899693282, guid: cebcfdaa451891b45a5300d9cb75218d, type: 2}
-  - {fileID: 1193551714793250, guid: baef92a4500801a43a09c0d80061838a, type: 2}
-  - {fileID: 1199899925114170, guid: 0909556e2e07c454d8e04c6230eb782f, type: 2}
+  - {fileID: 1146180822932658, guid: 0b15eaf4d11ae5e4f9fd6e81dae44355, type: 2}
+  - {fileID: 1021288004609760, guid: cebcfdaa451891b45a5300d9cb75218d, type: 2}
+  - {fileID: 1319226321668834, guid: baef92a4500801a43a09c0d80061838a, type: 2}
+  - {fileID: 1252860395760528, guid: 0909556e2e07c454d8e04c6230eb782f, type: 2}
   currentAtom: {fileID: 0}
   currentAtomNumber: 0
 --- !u!4 &1319184337
@@ -489,7 +488,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1856770827}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8299999, y: 0.9338335, z: -10}
+  m_LocalPosition: {x: 0, y: 0.9338335, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1319184337}
