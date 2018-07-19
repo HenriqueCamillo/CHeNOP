@@ -12,6 +12,8 @@ public class Atom : MonoBehaviour {
 	private GameObject gameManager;
 	private GameManager gmMngrScript;
 	public bool usingPower;
+	private bool transforming;
+	private Checkpoint checkpoint;
 	//[SerializeField] private float cooldown;
 	//	private bool facingRight = true;
 
@@ -35,24 +37,50 @@ public class Atom : MonoBehaviour {
 			atomAnimator.SetBool("FacingRight", true);
 		else if(rb.velocity.x<0)
 			atomAnimator.SetBool("FacingRight", false);
+		
+		if(gndChckScript.grounded)
+			atomAnimator.SetBool("Jumping", false);
+		else
+			atomAnimator.SetBool("Jumping", true);
 
-		if(Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.J)){
-			StartCoroutine(power());
+		
+
+		if((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.J)) && !transforming){
+			StartCoroutine(starTransforming());
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
 			//Collisions
 		if(other.gameObject.CompareTag("CheckPoint")){
-			gmMngrScript.respawn = other.transform.position;
-			Destroy(other.gameObject);
-			}
+			checkpoint = other.gameObject.GetComponent<Checkpoint>();
+			if(checkpoint.active)
+				gmMngrScript.respawn = other.transform.position;
+		}
 		else if(other.gameObject.CompareTag("Antimatter"))
 			this.transform.position = gmMngrScript.respawn;
 	}
 
-	private IEnumerator power(){		usingPower = true;
+	private IEnumerator power(){		
+		atomAnimator.SetBool("Liquid", true);
+		usingPower = true;
 		yield return new WaitForSeconds(5f);
 		usingPower = false;
+		atomAnimator.SetBool("Liquid", false);
+		atomAnimator.SetBool("Transforming", true);
+		transforming = true;
+		yield return new WaitForSeconds(0.3f);
+		transforming = false;
+		atomAnimator.SetBool("Transforming", false);
+	}
+
+	private IEnumerator starTransforming(){
+		atomAnimator.SetBool("Transforming", true);
+		transforming = true;
+		yield return new WaitForSeconds(0.3f);
+		transforming = false;
+		atomAnimator.SetBool("Transforming", false);
+		StartCoroutine(power());
+
 	}
 }

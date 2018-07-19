@@ -177,6 +177,7 @@ MonoBehaviour:
   speed: 5
   jump: 5
   gndChckScript: {fileID: 114405680700834572}
+  usingPower: 0
 --- !u!114 &114405680700834572
 MonoBehaviour:
   m_ObjectHideFlags: 1

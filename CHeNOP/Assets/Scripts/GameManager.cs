@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 		currentAtomScript = currentAtom.GetComponent<Atom>();
 		mercuryCollider = currentAtom.GetComponent<Collider2D>(); 
 		//darkRend = dark.GetComponent<Renderer>();
-		dark.enabled = false; 
+		//dark.enabled = false; 
 	}
 	
 	private void Update () {
@@ -50,18 +50,23 @@ public class GameManager : MonoBehaviour {
 			changeAtom((int)atom.Phosphorus);
 		}
 
-		if(currentAtomScript.usingPower){
-			if(!darkness || currentAtomNumber == (int)atom.Phosphorus){
-				dark.enabled = false;
-			}else{
-				dark.enabled = true;
-			}
+		if(darkness && !currentAtomScript.usingPower){
+			dark.enabled = true;
+		}else if (!darkness || (currentAtomNumber == (int)atom.Phosphorus && currentAtomScript.usingPower)){
+			dark.enabled = false;
+		}
 
-			if(currentAtomNumber == (int)atom.Mercury){
+		if(currentAtomNumber == (int)atom.Mercury){
+			if(currentAtomScript.usingPower){
+				if(mercuryCollider == null)
+					mercuryCollider = currentAtom.GetComponent<Collider2D>(); 
 				mercuryCollider.enabled = false;
+
+			}else{
+				if(mercuryCollider == null)
+					mercuryCollider = currentAtom.GetComponent<Collider2D>(); 
+				mercuryCollider.enabled = true;
 			}
-		}else {
-			mercuryCollider.enabled = true;
 		}	
 	}
 
