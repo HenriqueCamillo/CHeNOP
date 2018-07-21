@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] private bool darkness;
 	[SerializeField] private SpriteRenderer dark;
 	private Collider2D mercuryCollider; 
+	private Rigidbody2D heliumRb;
 
 	private enum atom {
 		Mercury = 0,
@@ -64,7 +65,19 @@ public class GameManager : MonoBehaviour {
 					mercuryCollider = currentAtom.GetComponent<Collider2D>(); 
 				mercuryCollider.enabled = true;
 			}
+		}
+		else if(currentAtomNumber == (int)atom.Helium){
+			if(currentAtomScript.usingPower){
+				if(heliumRb==null)
+					heliumRb = currentAtomScript.gameObject.GetComponent<Rigidbody2D>();
+				//heliumRb.gravityScale = 0f;
+				//heliumRb.AddForce(new Vector2(0,2f), ForceMode2D.Force);
+				heliumRb.velocity = new Vector2(heliumRb.velocity.x, 2f);
+			}else
+				heliumRb.gravityScale = 0.5f;
 		}	
+		
+
 	}
 
 	private void changeAtom(int atomNumber){

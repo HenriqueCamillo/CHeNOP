@@ -154,7 +154,7 @@ Animator:
   m_GameObject: {fileID: 1319226321668834}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 82cbcd33baa579a41a14c4d7f954e04c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e925129c345953418961126e95ad1c6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   jump: 5
   gndChckScript: {fileID: 114405680700834572}
   usingPower: 0
+  cooldown: 5
 --- !u!114 &114405680700834572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,7 +226,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c1d81ff3df4e31844960a4940e5669bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ab925623ea15ea43b00512fd9ef3907, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

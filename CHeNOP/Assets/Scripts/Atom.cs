@@ -7,12 +7,13 @@ public class Atom : MonoBehaviour {
 	private Rigidbody2D rb;
 	[SerializeField] float speed;
 	[SerializeField] float jump;
-	[SerializeField] private GroundCheck gndChckScript;
+	[SerializeField] GroundCheck gndChckScript;
 	private GameObject gameManager;
 	private GameManager gmMngrScript;
 	public bool usingPower;
 	private bool transforming;
 	private Checkpoint checkpoint;
+	[SerializeField] float cooldown;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
@@ -32,7 +33,7 @@ public class Atom : MonoBehaviour {
 			atomAnimator.SetBool("FacingRight", true);
 		else if(rb.velocity.x<0)
 			atomAnimator.SetBool("FacingRight", false);
-		
+
 		if(gndChckScript.grounded)
 			atomAnimator.SetBool("Jumping", false);
 		else
@@ -57,7 +58,7 @@ public class Atom : MonoBehaviour {
 	private IEnumerator power(){		
 		atomAnimator.SetBool("Liquid", true);
 		usingPower = true;
-		yield return new WaitForSeconds(5f);
+		yield return new WaitForSeconds(cooldown);
 		usingPower = false;
 		atomAnimator.SetBool("Liquid", false);
 		atomAnimator.SetBool("Transforming", true);
