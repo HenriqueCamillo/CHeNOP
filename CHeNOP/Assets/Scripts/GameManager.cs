@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public Vector2 respawn;
@@ -10,9 +11,7 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] private Atom currentAtomScript;
 	[SerializeField] private bool darkness;
 	[SerializeField] private SpriteRenderer dark;
-	[SerializeField] private Collider2D mercuryCollider; 
-
-	//private Renderer darkRend;
+	private Collider2D mercuryCollider; 
 
 	private enum atom {
 		Mercury = 0,
@@ -27,8 +26,6 @@ public class GameManager : MonoBehaviour {
 		currentAtom = GameObject.FindGameObjectWithTag("Atom");
 		currentAtomScript = currentAtom.GetComponent<Atom>();
 		mercuryCollider = currentAtom.GetComponent<Collider2D>(); 
-		//darkRend = dark.GetComponent<Renderer>();
-		//dark.enabled = false; 
 	}
 	
 	private void Update () {

@@ -7,22 +7,17 @@ public class Atom : MonoBehaviour {
 	private Rigidbody2D rb;
 	[SerializeField] float speed;
 	[SerializeField] float jump;
-	//private GameObject groundCheck;
 	[SerializeField] private GroundCheck gndChckScript;
 	private GameObject gameManager;
 	private GameManager gmMngrScript;
 	public bool usingPower;
 	private bool transforming;
 	private Checkpoint checkpoint;
-	//[SerializeField] private float cooldown;
-	//	private bool facingRight = true;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		gameManager = GameObject.FindGameObjectWithTag("GameManager");
 		gmMngrScript = gameManager.GetComponent<GameManager>();		
-//		groundCheck = GameObject.FindGameObjectWithTag("GroundCheck");
-//		gndChckScript = groundCheck.GetComponent<GroundCheck>();
 		atomAnimator = GetComponent<Animator>();
 	}
 	
@@ -42,8 +37,6 @@ public class Atom : MonoBehaviour {
 			atomAnimator.SetBool("Jumping", false);
 		else
 			atomAnimator.SetBool("Jumping", true);
-
-		
 
 		if((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.J)) && !transforming){
 			StartCoroutine(starTransforming());
@@ -81,6 +74,5 @@ public class Atom : MonoBehaviour {
 		transforming = false;
 		atomAnimator.SetBool("Transforming", false);
 		StartCoroutine(power());
-
 	}
 }
