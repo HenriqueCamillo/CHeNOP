@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 	public Vector2 respawn;
 	[SerializeField] private GameObject[] atoms;
-	[SerializeField] private GameObject currentAtom;
-	[SerializeField] private int currentAtomNumber;
+	public GameObject currentAtom;
+	public int currentAtomNumber;
 	[SerializeField] private Atom currentAtomScript;
 	[SerializeField] private bool darkness;
 	[SerializeField] private SpriteRenderer dark;
